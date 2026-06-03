@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>李国庆 - 个人主页 | 自动化工程师</title>
+<style>
+  :root {
+    --primary: #1a365d;
+    --primary-light: #2a4a7f;
+    --accent: #0ea5e9;
+    --accent-glow: #38bdf8;
+    --gold: #f59e0b;
+    --bg: #f8fafc;
+    --bg-card: #ffffff;
+    --text: #1e293b;
+    --text-light: #64748b;
+    --border: #e2e8f0;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+    --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+    --shadow-xl: 0 20px 50px rgba(0,0,0,0.15);
+    --radius: 12px;
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --font-cn: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, -apple-system, sans-serif;
+    --font-en: "Inter", "SF Pro Display", system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+  body {
+    font-family: var(--font-cn);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ===== Navbar ===== */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    transition: var(--transition);
+  }
+  .navbar.scrolled { box-shadow: var(--shadow); }
+  .nav-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 24px; height: 64px;
+  }
+  .nav-logo {
+    font-size: 1.25rem; font-weight: 700; color: var(--primary);
+    letter-spacing: -0.02em; text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 4px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--text-light); font-size: 0.9rem;
+    font-weight: 500; padding: 8px 14px; border-radius: 8px;
+    transition: var(--transition);
+  }
+  .nav-links a:hover { color: var(--primary); background: #f1f5f9; }
+
+  /* ===== Hero ===== */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    background: linear-gradient(135deg, #0f172a 0%, #1a365d 40%, #0c4a6e 70%, #0f172a 100%);
+    position: relative; overflow: hidden; padding: 100px 24px 80px;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -50%; right: -20%;
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(14,165,233,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -30%; left: -10%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(14,165,233,0.08) 0%, transparent 60%);
+    border-radius: 50%;
+  }
+  .hero-grid {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-inner {
+    max-width: 1100px; margin: 0 auto; position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+  }
+  .hero-content { color: #fff; }
+  .hero-greeting {
+    font-size: 0.95rem; color: var(--accent-glow); font-weight: 500;
+    letter-spacing: 0.1em; margin-bottom: 12px; text-transform: uppercase;
+  }
+  .hero-content h1 {
+    font-size: 3.5rem; font-weight: 800; line-height: 1.15;
+    letter-spacing: -0.03em; margin-bottom: 16px;
+  }
+  .hero-content h1 span { color: var(--accent-glow); }
+  .hero-subtitle {
+    font-size: 1.15rem; color: rgba(255,255,255,0.7);
+    margin-bottom: 32px; max-width: 460px;
+  }
+  .hero-tags {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px;
+  }
+  .hero-tag {
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    color: #e2e8f0; padding: 6px 16px; border-radius: 20px;
+    font-size: 0.85rem; font-weight: 500; backdrop-filter: blur(4px);
+  }
+  .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent); color: #fff; padding: 12px 28px;
+    border-radius: 10px; text-decoration: none; font-weight: 600;
+    font-size: 0.95rem; transition: var(--transition); border: none; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: #0284c7; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(14,165,233,0.4); }
+  .btn-outline {
+    background: transparent; color: #fff; padding: 12px 28px;
+    border-radius: 10px; text-decoration: none; font-weight: 600;
+    font-size: 0.95rem; border: 1.5px solid rgba(255,255,255,0.3);
+    transition: var(--transition); cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+
+  .hero-visual {
+    display: flex; justify-content: center; align-items: center;
+  }
+  .hero-avatar {
+    width: 280px; height: 280px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent) 0%, #6366f1 50%, #8b5cf6 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; box-shadow: 0 0 80px rgba(14,165,233,0.3);
+  }
+  .hero-avatar::after {
+    content: ''; position: absolute; inset: -8px; border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.2);
+  }
+  .hero-avatar-inner {
+    text-align: center; color: #fff;
+  }
+  .hero-avatar-inner .initial {
+    font-size: 6rem; font-weight: 800; line-height: 1; display: block;
+  }
+  .hero-avatar-inner .label {
+    font-size: 0.85rem; opacity: 0.8; letter-spacing: 0.15em;
+  }
+
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+    max-width: 1100px; margin: 60px auto 0; position: relative; z-index: 1;
+  }
+  .stat-card {
+    text-align: center; padding: 20px 12px;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius); backdrop-filter: blur(8px);
+  }
+  .stat-number { font-size: 1.8rem; font-weight: 800; color: var(--accent-glow); }
+  .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-top: 4px; }
+
+  /* ===== Section Common ===== */
+  .section { padding: 100px 24px; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.85rem; font-weight: 600; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 8px;
+  }
+  .section-title {
+    font-size: 2.4rem; font-weight: 800; color: var(--primary);
+    letter-spacing: -0.02em; margin-bottom: 16px;
+  }
+  .section-desc {
+    font-size: 1.05rem; color: var(--text-light); max-width: 600px;
+    margin-bottom: 48px;
+  }
+  .divider {
+    width: 60px; height: 4px; background: var(--accent); border-radius: 2px;
+    margin-bottom: 48px;
+  }
+
+  /* ===== Education ===== */
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+  .edu-main {
+    background: var(--bg-card); border-radius: var(--radius); padding: 36px;
+    box-shadow: var(--shadow); border: 1px solid var(--border);
+  }
+  .edu-main h3 { font-size: 1.3rem; color: var(--primary); margin-bottom: 4px; }
+  .edu-main .degree { color: var(--accent); font-weight: 600; margin-bottom: 8px; }
+  .edu-main .meta { color: var(--text-light); font-size: 0.9rem; margin-bottom: 20px; }
+  .gpa-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    color: #92400e; padding: 8px 18px; border-radius: 20px; font-weight: 700;
+    font-size: 0.9rem; margin-bottom: 20px;
+  }
+  .courses-title { font-weight: 600; margin-bottom: 10px; color: var(--text); }
+  .course-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .course-tag {
+    background: #f1f5f9; color: var(--text-light); padding: 5px 14px;
+    border-radius: 16px; font-size: 0.85rem; border: 1px solid var(--border);
+  }
+
+  .edu-side {
+    background: var(--bg-card); border-radius: var(--radius); padding: 36px;
+    box-shadow: var(--shadow); border: 1px solid var(--border);
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .job-target { margin-bottom: 4px; }
+  .job-target h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 14px; }
+  .target-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .target-tag {
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+    color: #1e40af; padding: 6px 16px; border-radius: 20px;
+    font-size: 0.85rem; font-weight: 600;
+  }
+  .contact-info { }
+  .contact-info h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 14px; }
+  .contact-item {
+    display: flex; align-items: center; gap: 12px; padding: 8px 0;
+    color: var(--text-light); font-size: 0.9rem;
+  }
+  .contact-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .ci-phone { background: #dcfce7; color: #16a34a; }
+  .ci-email { background: #dbeafe; color: #2563eb; }
+  .ci-location { background: #fef3c7; color: #d97706; }
+
+  /* ===== Skills ===== */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+  .skill-card {
+    background: var(--bg-card); border-radius: var(--radius); padding: 30px;
+    box-shadow: var(--shadow); border: 1px solid var(--border);
+    transition: var(--transition); position: relative; overflow: hidden;
+  }
+  .skill-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .skill-icon {
+    width: 48px; height: 48px; border-radius: 12px; display: flex;
+    align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 16px;
+  }
+  .skill-card h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 8px; }
+  .skill-card .skill-bar {
+    height: 6px; background: #e2e8f0; border-radius: 3px; margin-bottom: 14px; overflow: hidden;
+  }
+  .skill-card .skill-fill {
+    height: 100%; border-radius: 3px; transition: width 1s ease;
+    background: linear-gradient(90deg, var(--accent), var(--accent-glow));
+  }
+  .skill-card .skill-detail { color: var(--text-light); font-size: 0.88rem; line-height: 1.6; }
+
+  /* ===== Projects ===== */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(480px, 1fr)); gap: 24px; }
+  .project-card {
+    background: var(--bg-card); border-radius: var(--radius); padding: 32px;
+    box-shadow: var(--shadow); border: 1px solid var(--border);
+    transition: var(--transition); position: relative;
+    border-left: 4px solid var(--accent);
+  }
+  .project-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .project-badge {
+    display: inline-block; padding: 4px 14px; border-radius: 14px;
+    font-size: 0.78rem; font-weight: 700; margin-bottom: 14px;
+    letter-spacing: 0.03em;
+  }
+  .badge-gold { background: #fef3c7; color: #92400e; }
+  .badge-silver { background: #f1f5f9; color: #475569; }
+  .badge-bronze { background: #fef2f2; color: #991b1b; }
+  .badge-blue { background: #dbeafe; color: #1e40af; }
+  .project-card h3 { font-size: 1.15rem; color: var(--primary); margin-bottom: 6px; }
+  .project-role { color: var(--accent); font-size: 0.85rem; font-weight: 600; margin-bottom: 14px; }
+  .project-points { list-style: none; }
+  .project-points li {
+    position: relative; padding-left: 20px; margin-bottom: 8px;
+    color: var(--text-light); font-size: 0.9rem; line-height: 1.6;
+  }
+  .project-points li::before {
+    content: ''; position: absolute; left: 0; top: 9px;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+  }
+
+  /* ===== Experience ===== */
+  .exp-list { display: flex; flex-direction: column; gap: 28px; }
+  .exp-card {
+    background: var(--bg-card); border-radius: var(--radius); padding: 32px;
+    box-shadow: var(--shadow); border: 1px solid var(--border);
+    transition: var(--transition); display: grid; grid-template-columns: 200px 1fr;
+    gap: 30px;
+  }
+  .exp-card:hover { box-shadow: var(--shadow-lg); }
+  .exp-meta { }
+  .exp-company { font-size: 1.1rem; font-weight: 700; color: var(--primary); }
+  .exp-role { color: var(--accent); font-weight: 600; font-size: 0.9rem; margin-top: 4px; }
+  .exp-period { color: var(--text-light); font-size: 0.85rem; margin-top: 6px; }
+  .exp-detail { }
+  .exp-detail h3 { font-size: 1rem; color: var(--primary); margin-bottom: 10px; }
+  .exp-detail p { color: var(--text-light); font-size: 0.9rem; line-height: 1.7; margin-bottom: 8px; }
+  .exp-points { list-style: none; }
+  .exp-points li {
+    position: relative; padding-left: 20px; margin-bottom: 6px;
+    color: var(--text-light); font-size: 0.9rem; line-height: 1.6;
+  }
+  .exp-points li::before {
+    content: ''; position: absolute; left: 0; top: 9px;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+  }
+
+  /* ===== Practice ===== */
+  .practice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .practice-card {
+    background: var(--bg-card); border-radius: var(--radius); padding: 30px;
+    box-shadow: var(--shadow); border: 1px solid var(--border);
+    transition: var(--transition);
+  }
+  .practice-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+  .practice-card h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 10px; }
+  .practice-points { list-style: none; }
+  .practice-points li {
+    position: relative; padding-left: 20px; margin-bottom: 6px;
+    color: var(--text-light); font-size: 0.9rem; line-height: 1.6;
+  }
+  .practice-points li::before {
+    content: ''; position: absolute; left: 0; top: 9px;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--gold);
+  }
+
+  /* ===== Honors ===== */
+  .honors-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px;
+  }
+  .honor-card {
+    background: var(--bg-card); border-radius: var(--radius); padding: 24px;
+    box-shadow: var(--shadow); border: 1px solid var(--border);
+    transition: var(--transition); display: flex; align-items: flex-start; gap: 14px;
+  }
+  .honor-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+  .honor-icon {
+    width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+  }
+  .hi-1 { background: #fef3c7; }
+  .hi-2 { background: #e0e7ff; }
+  .hi-3 { background: #fce7f3; }
+  .hi-4 { background: #dcfce7; }
+  .hi-5 { background: #f1f5f9; }
+  .hi-6 { background: #e0f2fe; }
+  .honor-text h4 { font-size: 0.95rem; color: var(--primary); font-weight: 600; line-height: 1.4; }
+  .honor-level { font-size: 0.78rem; color: var(--text-light); margin-top: 4px; }
+
+  /* ===== CTA ===== */
+  .cta-section {
+    padding: 80px 24px; text-align: center;
+    background: linear-gradient(135deg, #1a365d, #0c4a6e);
+    position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at center, rgba(14,165,233,0.15) 0%, transparent 60%);
+  }
+  .cta-inner { max-width: 700px; margin: 0 auto; position: relative; z-index: 1; }
+  .cta-section h2 { font-size: 2rem; color: #fff; margin-bottom: 16px; }
+  .cta-section p { color: rgba(255,255,255,0.7); margin-bottom: 32px; font-size: 1.05rem; }
+  .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  /* ===== Footer ===== */
+  .footer {
+    background: #0f172a; color: rgba(255,255,255,0.5); padding: 40px 24px;
+    text-align: center; font-size: 0.85rem;
+  }
+  .footer-inner { max-width: 1100px; margin: 0 auto; }
+  .footer-name { color: #fff; font-weight: 600; margin-bottom: 8px; }
+
+  /* ===== Animations ===== */
+  .fade-in {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+    .hero-content h1 { font-size: 2.4rem; }
+    .hero-subtitle { max-width: 100%; }
+    .hero-tags { justify-content: center; }
+    .hero-buttons { justify-content: center; }
+    .hero-visual { order: -1; }
+    .hero-avatar { width: 200px; height: 200px; }
+    .hero-avatar-inner .initial { font-size: 4rem; }
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .edu-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .exp-card { grid-template-columns: 1fr; gap: 16px; }
+    .practice-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    .hero-content h1 { font-size: 1.9rem; }
+    .section-title { font-size: 1.7rem; }
+    .honors-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== NAVBAR ==================== -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">李<span>国庆</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">教育背景</a></li>
+      <li><a href="#skills">核心技能</a></li>
+      <li><a href="#projects">项目经历</a></li>
+      <li><a href="#experience">实习实践</a></li>
+      <li><a href="#honors">荣誉奖项</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-content fade-in">
+      <p class="hero-greeting">合肥大学 · 自动化专业 · 2026届</p>
+      <h1>你好，我是<br><span>李国庆</span></h1>
+      <p class="hero-subtitle">
+        专注于 PLC 控制与自动化系统集成，擅长 Siemens S7-1200/1500 编程调试、STM32 嵌入式开发及工业通信协议应用。
+      </p>
+      <div class="hero-tags">
+        <span class="hero-tag">PLC 编程</span>
+        <span class="hero-tag">STM32</span>
+        <span class="hero-tag">TIA Portal</span>
+        <span class="hero-tag">MATLAB/Simulink</span>
+        <span class="hero-tag">Profinet</span>
+        <span class="hero-tag">Modbus RTU</span>
+      </div>
+      <div class="hero-buttons">
+        <a href="#about" class="btn-primary">了解我 &rarr;</a>
+        <a href="mailto:2192156464@qq.com" class="btn-outline">联系我</a>
+      </div>
+    </div>
+    <div class="hero-visual fade-in">
+      <div class="hero-avatar">
+        <div class="hero-avatar-inner">
+          <span class="initial">李</span>
+          <span class="label">AUTOMATION</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-card fade-in">
+      <div class="stat-number">3.28</div>
+      <div class="stat-label">GPA</div>
+    </div>
+    <div class="stat-card fade-in">
+      <div class="stat-number">Top 7%</div>
+      <div class="stat-label">专业排名</div>
+    </div>
+    <div class="stat-card fade-in">
+      <div class="stat-number">4</div>
+      <div class="stat-label">国家级奖项</div>
+    </div>
+    <div class="stat-card fade-in">
+      <div class="stat-number">3+</div>
+      <div class="stat-label">项目经验</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ABOUT / EDUCATION ==================== -->
+<section class="section" id="about">
+  <div class="section-inner">
+    <p class="section-label fade-in">Education &amp; Target</p>
+    <h2 class="section-title fade-in">教育背景与求职方向</h2>
+    <div class="divider fade-in"></div>
+    <div class="edu-grid">
+      <div class="edu-main fade-in">
+        <h3>合肥大学</h3>
+        <p class="degree">自动化专业 · 本科</p>
+        <p class="meta">2026届应届毕业生</p>
+        <div class="gpa-badge">GPA 3.28 &nbsp;|&nbsp; 专业排名前 7%</div>
+        <p class="courses-title">主修课程</p>
+        <div class="course-tags">
+          <span class="course-tag">PLC 控制技术</span>
+          <span class="course-tag">自动控制原理</span>
+          <span class="course-tag">单片机</span>
+          <span class="course-tag">电机拖动</span>
+          <span class="course-tag">MATLAB/Simulink</span>
+          <span class="course-tag">C 语言</span>
+        </div>
+      </div>
+      <div class="edu-side fade-in">
+        <div class="job-target">
+          <h3>求职方向</h3>
+          <div class="target-tags">
+            <span class="target-tag">PLC 工程师</span>
+            <span class="target-tag">自动化工程师</span>
+            <span class="target-tag">电气调试工程师</span>
+            <span class="target-tag">技术销售工程师</span>
+          </div>
+        </div>
+        <div class="contact-info">
+          <h3>联系方式</h3>
+          <div class="contact-item">
+            <div class="contact-icon ci-phone">📞</div>
+            <span>17368894575</span>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon ci-email">✉️</div>
+            <span>2192156464@qq.com</span>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon ci-location">📍</div>
+            <span>安徽 · 合肥</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SKILLS ==================== -->
+<section class="section" id="skills" style="background: #f1f5f9;">
+  <div class="section-inner">
+    <p class="section-label fade-in">Core Skills</p>
+    <h2 class="section-title fade-in">核心技能</h2>
+    <div class="divider fade-in"></div>
+    <div class="skills-grid">
+      <div class="skill-card fade-in">
+        <div class="skill-icon" style="background:#dbeafe;color:#2563eb;">⚙️</div>
+        <h3>PLC 编程与调试</h3>
+        <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+        <p class="skill-detail">熟悉 Siemens S7-1200/S7-1500 PLC 编程、现场调试及基础故障排查；掌握梯形图逻辑、自锁互锁、顺序控制及 PID 控制基础</p>
+      </div>
+      <div class="skill-card fade-in">
+        <div class="skill-icon" style="background:#dcfce7;color:#16a34a;">🔧</div>
+        <h3>TIA Portal 开发环境</h3>
+        <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+        <p class="skill-detail">熟练使用 TIA Portal 进行 PLC 组态、程序编写、HMI 界面设计及项目整体管理</p>
+      </div>
+      <div class="skill-card fade-in">
+        <div class="skill-icon" style="background:#fef3c7;color:#d97706;">💻</div>
+        <h3>STM32 嵌入式开发</h3>
+        <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+        <p class="skill-detail">熟悉 STM32 开发流程，使用 Keil、STM32CubeMX 进行开发；掌握 UART、Modbus RTU、Profinet 等基础通信协议</p>
+      </div>
+      <div class="skill-card fade-in">
+        <div class="skill-icon" style="background:#e0e7ff;color:#4f46e5;">📊</div>
+        <h3>MATLAB / Simulink</h3>
+        <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+        <p class="skill-detail">熟练运用 MATLAB/Simulink 进行控制系统建模与仿真，使用 Scope 模块进行系统输出监测与动态参数调整</p>
+      </div>
+      <div class="skill-card fade-in">
+        <div class="skill-icon" style="background:#fce7f3;color:#db2777;">🔌</div>
+        <h3>工业通信与联调</h3>
+        <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+        <p class="skill-detail">了解变频器、伺服及 HMI 基础控制与联调流程；熟悉光电传感器、气缸等自动化元件的协同工作</p>
+      </div>
+      <div class="skill-card fade-in">
+        <div class="skill-icon" style="background:#f1f5f9;color:#475569;">🤖</div>
+        <h3>AI 工具辅助</h3>
+        <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+        <p class="skill-detail">熟练使用 ChatGPT、Midjourney 等 AI 工具辅助技术学习、创意生成与数字化方案展示</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PROJECTS ==================== -->
+<section class="section" id="projects">
+  <div class="section-inner">
+    <p class="section-label fade-in">Projects</p>
+    <h2 class="section-title fade-in">项目经历</h2>
+    <p class="section-desc fade-in">国家级竞赛获奖项目 | 从无人机飞控到智能仓储，每一次实战都是工程能力的沉淀</p>
+    <div class="divider fade-in"></div>
+    <div class="projects-grid">
+      <!-- Project 1 -->
+      <div class="project-card fade-in">
+        <span class="project-badge badge-gold">西门子杯 · 国家二等奖</span>
+        <h3>多旋翼无人机智能姿态控制系统</h3>
+        <p class="project-role">队员</p>
+        <ul class="project-points">
+          <li>基于 MATLAB/Simulink 搭建多旋翼无人机六自由度动力学模型</li>
+          <li>基于 PID 算法实现 Roll、Pitch、Yaw 三轴姿态稳定控制</li>
+          <li>参与 PID 参数整定与飞行路径逻辑优化，提升系统稳定性</li>
+          <li>使用 Scope 模块监测系统输出并进行动态参数调整</li>
+        </ul>
+      </div>
+      <!-- Project 2 -->
+      <div class="project-card fade-in" style="border-left-color: #f59e0b;">
+        <span class="project-badge badge-gold">西门子杯 · 国家三等奖</span>
+        <h3>PLC 智能仓储分拣系统</h3>
+        <p class="project-role">队长</p>
+        <ul class="project-points">
+          <li>基于 S7-1200 PLC 实现物料检测、输送与自动分拣功能</li>
+          <li>完成 I/O 点位分配、梯形图逻辑编写及 HMI 界面设计</li>
+          <li>联动光电传感器、变频器及气缸，实现设备自动化运行</li>
+          <li>实现气缸互锁、故障报警及输送带启停控制逻辑</li>
+        </ul>
+      </div>
+      <!-- Project 3 -->
+      <div class="project-card fade-in" style="border-left-color: #10b981;">
+        <span class="project-badge badge-blue">省级大创 · 金奖</span>
+        <h3>基于 STM32 的物联网空气检测系统</h3>
+        <p class="project-role">队长</p>
+        <ul class="project-points">
+          <li>基于 STM32 搭建环境检测系统，完成传感器数据采集</li>
+          <li>使用 C 语言完成 UART 串口通信及基础驱动开发</li>
+          <li>对接物联网平台，实现检测数据实时上传与可视化展示</li>
+          <li>参与系统联调与异常数据排查，提升系统运行稳定性</li>
+        </ul>
+      </div>
+      <!-- Project 4 -->
+      <div class="project-card fade-in" style="border-left-color: #8b5cf6;">
+        <span class="project-badge badge-gold">蓝桥杯 · 全国一等奖</span>
+        <h3>数字内容创意与虚拟场景设计</h3>
+        <p class="project-role">队员</p>
+        <ul class="project-points">
+          <li>参与数字内容创意与虚拟场景设计，完成视觉交互方案开发</li>
+          <li>熟练使用 Midjourney、ChatGPT 等 AI 工具完成创意生成与图像优化</li>
+          <li>基于 AI 绘图与数字建模工具完成场景构建及数字化展示</li>
+          <li>积累 AI 工具协同、人机交互设计及工程化协作经验</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== EXPERIENCE ==================== -->
+<section class="section" id="experience" style="background: #f1f5f9;">
+  <div class="section-inner">
+    <p class="section-label fade-in">Experience</p>
+    <h2 class="section-title fade-in">实习经历</h2>
+    <div class="divider fade-in"></div>
+    <div class="exp-list">
+      <div class="exp-card fade-in">
+        <div class="exp-meta">
+          <div class="exp-company">苏州昭元亿机电设备有限公司</div>
+          <div class="exp-role">电气调试实习生</div>
+        </div>
+        <div class="exp-detail">
+          <ul class="exp-points">
+            <li>参与汽车零部件装配产线现场调试与设备联调</li>
+            <li>协助完成 S7-1500 PLC 点位校验与逻辑调试</li>
+            <li>参与伺服参数调试、气缸动作测试及设备状态检查</li>
+            <li>使用监控表观察 I/O 状态，协助排查现场信号异常问题</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title fade-in" style="margin-top: 64px;">实践经历</h2>
+    <div class="divider fade-in"></div>
+    <div class="practice-grid">
+      <div class="practice-card fade-in">
+        <h3>拼多多电商运营（快餐桌椅类目）</h3>
+        <ul class="practice-points">
+          <li>独立负责选品、运营推广及客户售后</li>
+          <li>优化店铺流量与转化，实现累计盈利 1.3 万元</li>
+        </ul>
+      </div>
+      <div class="practice-card fade-in">
+        <h3>个体经营（化纤假发门店）</h3>
+        <ul class="practice-points">
+          <li>搭建线上线下一体化销售体系</li>
+          <li>负责门店运营、新媒体推广及客户维护</li>
+          <li>实现门店月稳定盈利 2 万元</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== HONORS ==================== -->
+<section class="section" id="honors">
+  <div class="section-inner">
+    <p class="section-label fade-in">Honors &amp; Awards</p>
+    <h2 class="section-title fade-in">荣誉奖项</h2>
+    <div class="divider fade-in"></div>
+    <div class="honors-grid">
+      <div class="honor-card fade-in">
+        <div class="honor-icon hi-1">🏆</div>
+        <div class="honor-text">
+          <h4>蓝桥杯全国大学生软件和信息技术大赛</h4>
+          <p class="honor-level">全国一等奖</p>
+        </div>
+      </div>
+      <div class="honor-card fade-in">
+        <div class="honor-icon hi-2">🥈</div>
+        <div class="honor-text">
+          <h4>西门子杯中国智能制造挑战赛</h4>
+          <p class="honor-level">国家二等奖</p>
+        </div>
+      </div>
+      <div class="honor-card fade-in">
+        <div class="honor-icon hi-3">🥉</div>
+        <div class="honor-text">
+          <h4>西门子杯中国智能制造挑战赛</h4>
+          <p class="honor-level">国家三等奖</p>
+        </div>
+      </div>
+      <div class="honor-card fade-in">
+        <div class="honor-icon hi-4">🌟</div>
+        <div class="honor-text">
+          <h4>大学生创新创业项目</h4>
+          <p class="honor-level">省级金奖</p>
+        </div>
+      </div>
+      <div class="honor-card fade-in">
+        <div class="honor-icon hi-5">📚</div>
+        <div class="honor-text">
+          <h4>专业特等奖学金、三等奖学金</h4>
+          <p class="honor-level">校级</p>
+        </div>
+      </div>
+      <div class="honor-card fade-in">
+        <div class="honor-icon hi-6">🌐</div>
+        <div class="honor-text">
+          <h4>大学英语四级（CET-4）</h4>
+          <p class="honor-level">国家级</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CTA ==================== -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2 class="fade-in">期待与您合作</h2>
+    <p class="fade-in">PLC 工程师 | 自动化工程师 | 电气调试工程师 | 技术销售工程师</p>
+    <div class="cta-buttons fade-in">
+      <a href="mailto:2192156464@qq.com" class="btn-primary">发送邮件</a>
+      <a href="tel:17368894575" class="btn-outline">拨打电话</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <p class="footer-name">李国庆</p>
+    <p>合肥大学 · 自动化专业 · 2026届应届毕业生</p>
+    <p style="margin-top: 8px;">&copy; 2026 个人主页</p>
+  </div>
+</footer>
+
+<script>
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  });
+</script>
+
+</body>
+</html>
