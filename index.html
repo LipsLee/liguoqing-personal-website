@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>李国庆 - 个人主页 | 自动化工程师</title>
+<title>鏉庡浗搴?- 涓汉涓婚〉 | 鑷姩鍖栧伐绋嬪笀</title>
 <style>
   :root {
     --primary: #1a365d;
@@ -358,6 +358,47 @@
   .honor-text h4 { font-size: 0.95rem; color: var(--primary); font-weight: 600; line-height: 1.4; }
   .honor-level { font-size: 0.78rem; color: var(--text-light); margin-top: 4px; }
 
+  /* ===== Certificate Thumb ===== */
+  .cert-thumb {
+    margin-top: 16px; border-radius: 8px; overflow: hidden;
+    border: 1px solid var(--border); cursor: pointer;
+    transition: var(--transition); position: relative;
+  }
+  .cert-thumb:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+  .cert-thumb img {
+    width: 100%; height: auto; display: block; max-height: 180px;
+    object-fit: cover;
+  }
+  .cert-thumb .cert-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.6));
+    color: #fff; font-size: 0.78rem; padding: 20px 12px 8px;
+    text-align: center; font-weight: 500;
+  }
+  .cert-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+  .cert-row .cert-thumb { margin-top: 0; }
+  .cert-thumb.full-width { grid-column: 1 / -1; }
+
+  /* ===== Lightbox ===== */
+  .lightbox {
+    display: none; position: fixed; inset: 0; z-index: 9999;
+    background: rgba(0,0,0,0.9); justify-content: center;
+    align-items: center; flex-direction: column;
+    backdrop-filter: blur(10px);
+  }
+  .lightbox.active { display: flex; }
+  .lightbox img { max-width: 90vw; max-height: 80vh; border-radius: 8px; box-shadow: var(--shadow-xl); }
+  .lightbox-close {
+    position: absolute; top: 24px; right: 32px; font-size: 2rem; color: #fff;
+    cursor: pointer; width: 48px; height: 48px; display: flex;
+    align-items: center; justify-content: center; border-radius: 50%;
+    background: rgba(255,255,255,0.1); border: none; transition: var(--transition);
+  }
+  .lightbox-close:hover { background: rgba(255,255,255,0.25); }
+  .lightbox-caption {
+    color: rgba(255,255,255,0.8); margin-top: 16px; font-size: 0.9rem;
+  }
+
   /* ===== CTA ===== */
   .cta-section {
     padding: 80px 24px; text-align: center;
@@ -420,13 +461,13 @@
 <!-- ==================== NAVBAR ==================== -->
 <nav class="navbar" id="navbar">
   <div class="nav-inner">
-    <a href="#" class="nav-logo">李<span>国庆</span></a>
+    <a href="#" class="nav-logo">鏉?span>鍥藉簡</span></a>
     <ul class="nav-links">
-      <li><a href="#about">教育背景</a></li>
-      <li><a href="#skills">核心技能</a></li>
-      <li><a href="#projects">项目经历</a></li>
-      <li><a href="#experience">实习实践</a></li>
-      <li><a href="#honors">荣誉奖项</a></li>
+      <li><a href="#about">鏁欒偛鑳屾櫙</a></li>
+      <li><a href="#skills">鏍稿績鎶€鑳?/a></li>
+      <li><a href="#projects">椤圭洰缁忓巻</a></li>
+      <li><a href="#experience">瀹炰範瀹炶返</a></li>
+      <li><a href="#honors">鑽ｈ獕濂栭」</a></li>
     </ul>
   </div>
 </nav>
@@ -436,13 +477,12 @@
   <div class="hero-grid"></div>
   <div class="hero-inner">
     <div class="hero-content fade-in">
-      <p class="hero-greeting">合肥大学 · 自动化专业 · 2026届</p>
-      <h1>你好，我是<br><span>李国庆</span></h1>
+      <p class="hero-greeting">鍚堣偉澶у 路 鑷姩鍖栦笓涓?路 2026灞?/p>
+      <h1>浣犲ソ锛屾垜鏄?br><span>鏉庡浗搴?/span></h1>
       <p class="hero-subtitle">
-        专注于 PLC 控制与自动化系统集成，擅长 Siemens S7-1200/1500 编程调试、STM32 嵌入式开发及工业通信协议应用。
-      </p>
+        涓撴敞浜?PLC 鎺у埗涓庤嚜鍔ㄥ寲绯荤粺闆嗘垚锛屾搮闀?Siemens S7-1200/1500 缂栫▼璋冭瘯銆丼TM32 宓屽叆寮忓紑鍙戝強宸ヤ笟閫氫俊鍗忚搴旂敤銆?      </p>
       <div class="hero-tags">
-        <span class="hero-tag">PLC 编程</span>
+        <span class="hero-tag">PLC 缂栫▼</span>
         <span class="hero-tag">STM32</span>
         <span class="hero-tag">TIA Portal</span>
         <span class="hero-tag">MATLAB/Simulink</span>
@@ -450,14 +490,14 @@
         <span class="hero-tag">Modbus RTU</span>
       </div>
       <div class="hero-buttons">
-        <a href="#about" class="btn-primary">了解我 &rarr;</a>
-        <a href="mailto:2192156464@qq.com" class="btn-outline">联系我</a>
+        <a href="#about" class="btn-primary">浜嗚В鎴?&rarr;</a>
+        <a href="mailto:2192156464@qq.com" class="btn-outline">鑱旂郴鎴?/a>
       </div>
     </div>
     <div class="hero-visual fade-in">
       <div class="hero-avatar">
         <div class="hero-avatar-inner">
-          <span class="initial">李</span>
+          <span class="initial">鏉?/span>
           <span class="label">AUTOMATION</span>
         </div>
       </div>
@@ -470,15 +510,15 @@
     </div>
     <div class="stat-card fade-in">
       <div class="stat-number">Top 7%</div>
-      <div class="stat-label">专业排名</div>
+      <div class="stat-label">涓撲笟鎺掑悕</div>
     </div>
     <div class="stat-card fade-in">
       <div class="stat-number">4</div>
-      <div class="stat-label">国家级奖项</div>
+      <div class="stat-label">鍥藉绾у椤?/div>
     </div>
     <div class="stat-card fade-in">
       <div class="stat-number">3+</div>
-      <div class="stat-label">项目经验</div>
+      <div class="stat-label">椤圭洰缁忛獙</div>
     </div>
   </div>
 </section>
@@ -487,47 +527,47 @@
 <section class="section" id="about">
   <div class="section-inner">
     <p class="section-label fade-in">Education &amp; Target</p>
-    <h2 class="section-title fade-in">教育背景与求职方向</h2>
+    <h2 class="section-title fade-in">鏁欒偛鑳屾櫙涓庢眰鑱屾柟鍚?/h2>
     <div class="divider fade-in"></div>
     <div class="edu-grid">
       <div class="edu-main fade-in">
-        <h3>合肥大学</h3>
-        <p class="degree">自动化专业 · 本科</p>
-        <p class="meta">2026届应届毕业生</p>
-        <div class="gpa-badge">GPA 3.28 &nbsp;|&nbsp; 专业排名前 7%</div>
-        <p class="courses-title">主修课程</p>
+        <h3>鍚堣偉澶у</h3>
+        <p class="degree">鑷姩鍖栦笓涓?路 鏈</p>
+        <p class="meta">2026灞婂簲灞婃瘯涓氱敓</p>
+        <div class="gpa-badge">GPA 3.28 &nbsp;|&nbsp; 涓撲笟鎺掑悕鍓?7%</div>
+        <p class="courses-title">涓讳慨璇剧▼</p>
         <div class="course-tags">
-          <span class="course-tag">PLC 控制技术</span>
-          <span class="course-tag">自动控制原理</span>
-          <span class="course-tag">单片机</span>
-          <span class="course-tag">电机拖动</span>
+          <span class="course-tag">PLC 鎺у埗鎶€鏈?/span>
+          <span class="course-tag">鑷姩鎺у埗鍘熺悊</span>
+          <span class="course-tag">鍗曠墖鏈?/span>
+          <span class="course-tag">鐢垫満鎷栧姩</span>
           <span class="course-tag">MATLAB/Simulink</span>
-          <span class="course-tag">C 语言</span>
+          <span class="course-tag">C 璇█</span>
         </div>
       </div>
       <div class="edu-side fade-in">
         <div class="job-target">
-          <h3>求职方向</h3>
+          <h3>姹傝亴鏂瑰悜</h3>
           <div class="target-tags">
-            <span class="target-tag">PLC 工程师</span>
-            <span class="target-tag">自动化工程师</span>
-            <span class="target-tag">电气调试工程师</span>
-            <span class="target-tag">技术销售工程师</span>
+            <span class="target-tag">PLC 宸ョ▼甯?/span>
+            <span class="target-tag">鑷姩鍖栧伐绋嬪笀</span>
+            <span class="target-tag">鐢垫皵璋冭瘯宸ョ▼甯?/span>
+            <span class="target-tag">鎶€鏈攢鍞伐绋嬪笀</span>
           </div>
         </div>
         <div class="contact-info">
-          <h3>联系方式</h3>
+          <h3>鑱旂郴鏂瑰紡</h3>
           <div class="contact-item">
-            <div class="contact-icon ci-phone">📞</div>
+            <div class="contact-icon ci-phone">馃摓</div>
             <span>17368894575</span>
           </div>
           <div class="contact-item">
-            <div class="contact-icon ci-email">✉️</div>
+            <div class="contact-icon ci-email">鉁夛笍</div>
             <span>2192156464@qq.com</span>
           </div>
           <div class="contact-item">
-            <div class="contact-icon ci-location">📍</div>
-            <span>安徽 · 合肥</span>
+            <div class="contact-icon ci-location">馃搷</div>
+            <span>瀹夊窘 路 鍚堣偉</span>
           </div>
         </div>
       </div>
@@ -539,44 +579,44 @@
 <section class="section" id="skills" style="background: #f1f5f9;">
   <div class="section-inner">
     <p class="section-label fade-in">Core Skills</p>
-    <h2 class="section-title fade-in">核心技能</h2>
+    <h2 class="section-title fade-in">鏍稿績鎶€鑳?/h2>
     <div class="divider fade-in"></div>
     <div class="skills-grid">
       <div class="skill-card fade-in">
-        <div class="skill-icon" style="background:#dbeafe;color:#2563eb;">⚙️</div>
-        <h3>PLC 编程与调试</h3>
+        <div class="skill-icon" style="background:#dbeafe;color:#2563eb;">鈿欙笍</div>
+        <h3>PLC 缂栫▼涓庤皟璇?/h3>
         <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
-        <p class="skill-detail">熟悉 Siemens S7-1200/S7-1500 PLC 编程、现场调试及基础故障排查；掌握梯形图逻辑、自锁互锁、顺序控制及 PID 控制基础</p>
+        <p class="skill-detail">鐔熸倝 Siemens S7-1200/S7-1500 PLC 缂栫▼銆佺幇鍦鸿皟璇曞強鍩虹鏁呴殰鎺掓煡锛涙帉鎻℃褰㈠浘閫昏緫銆佽嚜閿佷簰閿併€侀『搴忔帶鍒跺強 PID 鎺у埗鍩虹</p>
       </div>
       <div class="skill-card fade-in">
-        <div class="skill-icon" style="background:#dcfce7;color:#16a34a;">🔧</div>
-        <h3>TIA Portal 开发环境</h3>
+        <div class="skill-icon" style="background:#dcfce7;color:#16a34a;">馃敡</div>
+        <h3>TIA Portal 寮€鍙戠幆澧?/h3>
         <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
-        <p class="skill-detail">熟练使用 TIA Portal 进行 PLC 组态、程序编写、HMI 界面设计及项目整体管理</p>
+        <p class="skill-detail">鐔熺粌浣跨敤 TIA Portal 杩涜 PLC 缁勬€併€佺▼搴忕紪鍐欍€丠MI 鐣岄潰璁捐鍙婇」鐩暣浣撶鐞?/p>
       </div>
       <div class="skill-card fade-in">
-        <div class="skill-icon" style="background:#fef3c7;color:#d97706;">💻</div>
-        <h3>STM32 嵌入式开发</h3>
+        <div class="skill-icon" style="background:#fef3c7;color:#d97706;">馃捇</div>
+        <h3>STM32 宓屽叆寮忓紑鍙?/h3>
         <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
-        <p class="skill-detail">熟悉 STM32 开发流程，使用 Keil、STM32CubeMX 进行开发；掌握 UART、Modbus RTU、Profinet 等基础通信协议</p>
+        <p class="skill-detail">鐔熸倝 STM32 寮€鍙戞祦绋嬶紝浣跨敤 Keil銆丼TM32CubeMX 杩涜寮€鍙戯紱鎺屾彙 UART銆丮odbus RTU銆丳rofinet 绛夊熀纭€閫氫俊鍗忚</p>
       </div>
       <div class="skill-card fade-in">
-        <div class="skill-icon" style="background:#e0e7ff;color:#4f46e5;">📊</div>
+        <div class="skill-icon" style="background:#e0e7ff;color:#4f46e5;">馃搳</div>
         <h3>MATLAB / Simulink</h3>
         <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
-        <p class="skill-detail">熟练运用 MATLAB/Simulink 进行控制系统建模与仿真，使用 Scope 模块进行系统输出监测与动态参数调整</p>
+        <p class="skill-detail">鐔熺粌杩愮敤 MATLAB/Simulink 杩涜鎺у埗绯荤粺寤烘ā涓庝豢鐪燂紝浣跨敤 Scope 妯″潡杩涜绯荤粺杈撳嚭鐩戞祴涓庡姩鎬佸弬鏁拌皟鏁?/p>
       </div>
       <div class="skill-card fade-in">
-        <div class="skill-icon" style="background:#fce7f3;color:#db2777;">🔌</div>
-        <h3>工业通信与联调</h3>
+        <div class="skill-icon" style="background:#fce7f3;color:#db2777;">馃攲</div>
+        <h3>宸ヤ笟閫氫俊涓庤仈璋?/h3>
         <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
-        <p class="skill-detail">了解变频器、伺服及 HMI 基础控制与联调流程；熟悉光电传感器、气缸等自动化元件的协同工作</p>
+        <p class="skill-detail">浜嗚В鍙橀鍣ㄣ€佷己鏈嶅強 HMI 鍩虹鎺у埗涓庤仈璋冩祦绋嬶紱鐔熸倝鍏夌數浼犳劅鍣ㄣ€佹皵缂哥瓑鑷姩鍖栧厓浠剁殑鍗忓悓宸ヤ綔</p>
       </div>
       <div class="skill-card fade-in">
-        <div class="skill-icon" style="background:#f1f5f9;color:#475569;">🤖</div>
-        <h3>AI 工具辅助</h3>
+        <div class="skill-icon" style="background:#f1f5f9;color:#475569;">馃</div>
+        <h3>AI 宸ュ叿杈呭姪</h3>
         <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
-        <p class="skill-detail">熟练使用 ChatGPT、Midjourney 等 AI 工具辅助技术学习、创意生成与数字化方案展示</p>
+        <p class="skill-detail">鐔熺粌浣跨敤 ChatGPT銆丮idjourney 绛?AI 宸ュ叿杈呭姪鎶€鏈涔犮€佸垱鎰忕敓鎴愪笌鏁板瓧鍖栨柟妗堝睍绀?/p>
       </div>
     </div>
   </div>
@@ -586,57 +626,75 @@
 <section class="section" id="projects">
   <div class="section-inner">
     <p class="section-label fade-in">Projects</p>
-    <h2 class="section-title fade-in">项目经历</h2>
-    <p class="section-desc fade-in">国家级竞赛获奖项目 | 从无人机飞控到智能仓储，每一次实战都是工程能力的沉淀</p>
+    <h2 class="section-title fade-in">椤圭洰缁忓巻</h2>
+    <p class="section-desc fade-in">鍥藉绾х珵璧涜幏濂栭」鐩?| 浠庢棤浜烘満椋炴帶鍒版櫤鑳戒粨鍌紝姣忎竴娆″疄鎴橀兘鏄伐绋嬭兘鍔涚殑娌夋穩</p>
     <div class="divider fade-in"></div>
     <div class="projects-grid">
       <!-- Project 1 -->
       <div class="project-card fade-in">
-        <span class="project-badge badge-gold">西门子杯 · 国家二等奖</span>
-        <h3>多旋翼无人机智能姿态控制系统</h3>
-        <p class="project-role">队员</p>
+        <span class="project-badge badge-gold">瑗块棬瀛愭澂 路 鍥藉浜岀瓑濂?/span>
+        <h3>澶氭棆缈兼棤浜烘満鏅鸿兘濮挎€佹帶鍒剁郴缁?/h3>
+        <p class="project-role">闃熷憳</p>
         <ul class="project-points">
-          <li>基于 MATLAB/Simulink 搭建多旋翼无人机六自由度动力学模型</li>
-          <li>基于 PID 算法实现 Roll、Pitch、Yaw 三轴姿态稳定控制</li>
-          <li>参与 PID 参数整定与飞行路径逻辑优化，提升系统稳定性</li>
-          <li>使用 Scope 模块监测系统输出并进行动态参数调整</li>
+          <li>鍩轰簬 MATLAB/Simulink 鎼缓澶氭棆缈兼棤浜烘満鍏嚜鐢卞害鍔ㄥ姏瀛︽ā鍨?/li>
+          <li>鍩轰簬 PID 绠楁硶瀹炵幇 Roll銆丳itch銆乊aw 涓夎酱濮挎€佺ǔ瀹氭帶鍒?/li>
+          <li>鍙備笌 PID 鍙傛暟鏁村畾涓庨琛岃矾寰勯€昏緫浼樺寲锛屾彁鍗囩郴缁熺ǔ瀹氭€?/li>
+          <li>浣跨敤 Scope 妯″潡鐩戞祴绯荤粺杈撳嚭骞惰繘琛屽姩鎬佸弬鏁拌皟鏁?/li>
         </ul>
+        <div class="cert-row">
+          <div class="cert-thumb full-width" onclick="openLightbox('images/cimc-award-2nd.jpg','CIMC 涓浗鏅鸿兘鍒堕€犳寫鎴樿禌 路 鍥藉浜岀瓑濂?)">
+            <img src="images/cimc-award-2nd.jpg" alt="CIMC 鍥藉浜岀瓑濂? loading="lazy">
+            <span class="cert-label">鐐瑰嚮鏌ョ湅鑾峰璇佷功</span>
+          </div>
+        </div>
       </div>
       <!-- Project 2 -->
       <div class="project-card fade-in" style="border-left-color: #f59e0b;">
-        <span class="project-badge badge-gold">西门子杯 · 国家三等奖</span>
-        <h3>PLC 智能仓储分拣系统</h3>
-        <p class="project-role">队长</p>
+        <span class="project-badge badge-gold">瑗块棬瀛愭澂 路 鍥藉涓夌瓑濂?/span>
+        <h3>PLC 鏅鸿兘浠撳偍鍒嗘嫞绯荤粺</h3>
+        <p class="project-role">闃熼暱</p>
         <ul class="project-points">
-          <li>基于 S7-1200 PLC 实现物料检测、输送与自动分拣功能</li>
-          <li>完成 I/O 点位分配、梯形图逻辑编写及 HMI 界面设计</li>
-          <li>联动光电传感器、变频器及气缸，实现设备自动化运行</li>
-          <li>实现气缸互锁、故障报警及输送带启停控制逻辑</li>
+          <li>鍩轰簬 S7-1200 PLC 瀹炵幇鐗╂枡妫€娴嬨€佽緭閫佷笌鑷姩鍒嗘嫞鍔熻兘</li>
+          <li>瀹屾垚 I/O 鐐逛綅鍒嗛厤銆佹褰㈠浘閫昏緫缂栧啓鍙?HMI 鐣岄潰璁捐</li>
+          <li>鑱斿姩鍏夌數浼犳劅鍣ㄣ€佸彉棰戝櫒鍙婃皵缂革紝瀹炵幇璁惧鑷姩鍖栬繍琛?/li>
+          <li>瀹炵幇姘旂几浜掗攣銆佹晠闅滄姤璀﹀強杈撻€佸甫鍚仠鎺у埗閫昏緫</li>
         </ul>
+        <div class="cert-row">
+          <div class="cert-thumb full-width" onclick="openLightbox('images/cimc-award-3rd.jpg','CIMC 涓浗鏅鸿兘鍒堕€犳寫鎴樿禌 路 鍥藉涓夌瓑濂?)">
+            <img src="images/cimc-award-3rd.jpg" alt="CIMC 鍥藉涓夌瓑濂? loading="lazy">
+            <span class="cert-label">鐐瑰嚮鏌ョ湅鑾峰璇佷功</span>
+          </div>
+        </div>
       </div>
       <!-- Project 3 -->
       <div class="project-card fade-in" style="border-left-color: #10b981;">
-        <span class="project-badge badge-blue">省级大创 · 金奖</span>
-        <h3>基于 STM32 的物联网空气检测系统</h3>
-        <p class="project-role">队长</p>
+        <span class="project-badge badge-blue">鐪佺骇澶у垱 路 閲戝</span>
+        <h3>鍩轰簬 STM32 鐨勭墿鑱旂綉绌烘皵妫€娴嬬郴缁?/h3>
+        <p class="project-role">闃熼暱</p>
         <ul class="project-points">
-          <li>基于 STM32 搭建环境检测系统，完成传感器数据采集</li>
-          <li>使用 C 语言完成 UART 串口通信及基础驱动开发</li>
-          <li>对接物联网平台，实现检测数据实时上传与可视化展示</li>
-          <li>参与系统联调与异常数据排查，提升系统运行稳定性</li>
+          <li>鍩轰簬 STM32 鎼缓鐜妫€娴嬬郴缁燂紝瀹屾垚浼犳劅鍣ㄦ暟鎹噰闆?/li>
+          <li>浣跨敤 C 璇█瀹屾垚 UART 涓插彛閫氫俊鍙婂熀纭€椹卞姩寮€鍙?/li>
+          <li>瀵规帴鐗╄仈缃戝钩鍙帮紝瀹炵幇妫€娴嬫暟鎹疄鏃朵笂浼犱笌鍙鍖栧睍绀?/li>
+          <li>鍙備笌绯荤粺鑱旇皟涓庡紓甯告暟鎹帓鏌ワ紝鎻愬崌绯荤粺杩愯绋冲畾鎬?/li>
         </ul>
       </div>
       <!-- Project 4 -->
       <div class="project-card fade-in" style="border-left-color: #8b5cf6;">
-        <span class="project-badge badge-gold">蓝桥杯 · 全国一等奖</span>
-        <h3>数字内容创意与虚拟场景设计</h3>
-        <p class="project-role">队员</p>
+        <span class="project-badge badge-gold">钃濇ˉ鏉?路 鍏ㄥ浗涓€绛夊</span>
+        <h3>鏁板瓧鍐呭鍒涙剰涓庤櫄鎷熷満鏅璁?/h3>
+        <p class="project-role">闃熷憳</p>
         <ul class="project-points">
-          <li>参与数字内容创意与虚拟场景设计，完成视觉交互方案开发</li>
-          <li>熟练使用 Midjourney、ChatGPT 等 AI 工具完成创意生成与图像优化</li>
-          <li>基于 AI 绘图与数字建模工具完成场景构建及数字化展示</li>
-          <li>积累 AI 工具协同、人机交互设计及工程化协作经验</li>
+          <li>鍙備笌鏁板瓧鍐呭鍒涙剰涓庤櫄鎷熷満鏅璁★紝瀹屾垚瑙嗚浜や簰鏂规寮€鍙?/li>
+          <li>鐔熺粌浣跨敤 Midjourney銆丆hatGPT 绛?AI 宸ュ叿瀹屾垚鍒涙剰鐢熸垚涓庡浘鍍忎紭鍖?/li>
+          <li>鍩轰簬 AI 缁樺浘涓庢暟瀛楀缓妯″伐鍏峰畬鎴愬満鏅瀯寤哄強鏁板瓧鍖栧睍绀?/li>
+          <li>绉疮 AI 宸ュ叿鍗忓悓銆佷汉鏈轰氦浜掕璁″強宸ョ▼鍖栧崗浣滅粡楠?/li>
         </ul>
+        <div class="cert-row">
+          <div class="cert-thumb full-width" onclick="openLightbox('images/award-lanqiao-1st.jpg','钃濇ˉ鏉叏鍥藉ぇ瀛︾敓杞欢鍜屼俊鎭妧鏈ぇ璧?路 鍏ㄥ浗涓€绛夊')">
+            <img src="images/award-lanqiao-1st.jpg" alt="钃濇ˉ鏉叏鍥戒竴绛夊" loading="lazy">
+            <span class="cert-label">鐐瑰嚮鏌ョ湅鑾峰璇佷功</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -646,41 +704,41 @@
 <section class="section" id="experience" style="background: #f1f5f9;">
   <div class="section-inner">
     <p class="section-label fade-in">Experience</p>
-    <h2 class="section-title fade-in">实习经历</h2>
+    <h2 class="section-title fade-in">瀹炰範缁忓巻</h2>
     <div class="divider fade-in"></div>
     <div class="exp-list">
       <div class="exp-card fade-in">
         <div class="exp-meta">
-          <div class="exp-company">苏州昭元亿机电设备有限公司</div>
-          <div class="exp-role">电气调试实习生</div>
+          <div class="exp-company">鑻忓窞鏄厓浜挎満鐢佃澶囨湁闄愬叕鍙?/div>
+          <div class="exp-role">鐢垫皵璋冭瘯瀹炰範鐢?/div>
         </div>
         <div class="exp-detail">
           <ul class="exp-points">
-            <li>参与汽车零部件装配产线现场调试与设备联调</li>
-            <li>协助完成 S7-1500 PLC 点位校验与逻辑调试</li>
-            <li>参与伺服参数调试、气缸动作测试及设备状态检查</li>
-            <li>使用监控表观察 I/O 状态，协助排查现场信号异常问题</li>
+            <li>鍙備笌姹借溅闆堕儴浠惰閰嶄骇绾跨幇鍦鸿皟璇曚笌璁惧鑱旇皟</li>
+            <li>鍗忓姪瀹屾垚 S7-1500 PLC 鐐逛綅鏍￠獙涓庨€昏緫璋冭瘯</li>
+            <li>鍙備笌浼烘湇鍙傛暟璋冭瘯銆佹皵缂稿姩浣滄祴璇曞強璁惧鐘舵€佹鏌?/li>
+            <li>浣跨敤鐩戞帶琛ㄨ瀵?I/O 鐘舵€侊紝鍗忓姪鎺掓煡鐜板満淇″彿寮傚父闂</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <h2 class="section-title fade-in" style="margin-top: 64px;">实践经历</h2>
+    <h2 class="section-title fade-in" style="margin-top: 64px;">瀹炶返缁忓巻</h2>
     <div class="divider fade-in"></div>
     <div class="practice-grid">
       <div class="practice-card fade-in">
-        <h3>拼多多电商运营（快餐桌椅类目）</h3>
+        <h3>鎷煎澶氱數鍟嗚繍钀ワ紙蹇妗屾绫荤洰锛?/h3>
         <ul class="practice-points">
-          <li>独立负责选品、运营推广及客户售后</li>
-          <li>优化店铺流量与转化，实现累计盈利 1.3 万元</li>
+          <li>鐙珛璐熻矗閫夊搧銆佽繍钀ユ帹骞垮強瀹㈡埛鍞悗</li>
+          <li>浼樺寲搴楅摵娴侀噺涓庤浆鍖栵紝瀹炵幇绱鐩堝埄 1.3 涓囧厓</li>
         </ul>
       </div>
       <div class="practice-card fade-in">
-        <h3>个体经营（化纤假发门店）</h3>
+        <h3>涓綋缁忚惀锛堝寲绾ゅ亣鍙戦棬搴楋級</h3>
         <ul class="practice-points">
-          <li>搭建线上线下一体化销售体系</li>
-          <li>负责门店运营、新媒体推广及客户维护</li>
-          <li>实现门店月稳定盈利 2 万元</li>
+          <li>鎼缓绾夸笂绾夸笅涓€浣撳寲閿€鍞綋绯?/li>
+          <li>璐熻矗闂ㄥ簵杩愯惀銆佹柊濯掍綋鎺ㄥ箍鍙婂鎴风淮鎶?/li>
+          <li>瀹炵幇闂ㄥ簵鏈堢ǔ瀹氱泩鍒?2 涓囧厓</li>
         </ul>
       </div>
     </div>
@@ -691,49 +749,49 @@
 <section class="section" id="honors">
   <div class="section-inner">
     <p class="section-label fade-in">Honors &amp; Awards</p>
-    <h2 class="section-title fade-in">荣誉奖项</h2>
+    <h2 class="section-title fade-in">鑽ｈ獕濂栭」</h2>
     <div class="divider fade-in"></div>
     <div class="honors-grid">
       <div class="honor-card fade-in">
-        <div class="honor-icon hi-1">🏆</div>
+        <div class="honor-icon hi-1">馃弳</div>
         <div class="honor-text">
-          <h4>蓝桥杯全国大学生软件和信息技术大赛</h4>
-          <p class="honor-level">全国一等奖</p>
+          <h4>钃濇ˉ鏉叏鍥藉ぇ瀛︾敓杞欢鍜屼俊鎭妧鏈ぇ璧?/h4>
+          <p class="honor-level">鍏ㄥ浗涓€绛夊</p>
         </div>
       </div>
       <div class="honor-card fade-in">
-        <div class="honor-icon hi-2">🥈</div>
+        <div class="honor-icon hi-2">馃</div>
         <div class="honor-text">
-          <h4>西门子杯中国智能制造挑战赛</h4>
-          <p class="honor-level">国家二等奖</p>
+          <h4>瑗块棬瀛愭澂涓浗鏅鸿兘鍒堕€犳寫鎴樿禌</h4>
+          <p class="honor-level">鍥藉浜岀瓑濂?/p>
         </div>
       </div>
       <div class="honor-card fade-in">
-        <div class="honor-icon hi-3">🥉</div>
+        <div class="honor-icon hi-3">馃</div>
         <div class="honor-text">
-          <h4>西门子杯中国智能制造挑战赛</h4>
-          <p class="honor-level">国家三等奖</p>
+          <h4>瑗块棬瀛愭澂涓浗鏅鸿兘鍒堕€犳寫鎴樿禌</h4>
+          <p class="honor-level">鍥藉涓夌瓑濂?/p>
         </div>
       </div>
       <div class="honor-card fade-in">
-        <div class="honor-icon hi-4">🌟</div>
+        <div class="honor-icon hi-4">馃専</div>
         <div class="honor-text">
-          <h4>大学生创新创业项目</h4>
-          <p class="honor-level">省级金奖</p>
+          <h4>澶у鐢熷垱鏂板垱涓氶」鐩?/h4>
+          <p class="honor-level">鐪佺骇閲戝</p>
         </div>
       </div>
       <div class="honor-card fade-in">
-        <div class="honor-icon hi-5">📚</div>
+        <div class="honor-icon hi-5">馃摎</div>
         <div class="honor-text">
-          <h4>专业特等奖学金、三等奖学金</h4>
-          <p class="honor-level">校级</p>
+          <h4>涓撲笟鐗圭瓑濂栧閲戙€佷笁绛夊瀛﹂噾</h4>
+          <p class="honor-level">鏍＄骇</p>
         </div>
       </div>
       <div class="honor-card fade-in">
-        <div class="honor-icon hi-6">🌐</div>
+        <div class="honor-icon hi-6">馃寪</div>
         <div class="honor-text">
-          <h4>大学英语四级（CET-4）</h4>
-          <p class="honor-level">国家级</p>
+          <h4>澶у鑻辫鍥涚骇锛圕ET-4锛?/h4>
+          <p class="honor-level">鍥藉绾?/p>
         </div>
       </div>
     </div>
@@ -743,11 +801,11 @@
 <!-- ==================== CTA ==================== -->
 <section class="cta-section">
   <div class="cta-inner">
-    <h2 class="fade-in">期待与您合作</h2>
-    <p class="fade-in">PLC 工程师 | 自动化工程师 | 电气调试工程师 | 技术销售工程师</p>
+    <h2 class="fade-in">鏈熷緟涓庢偍鍚堜綔</h2>
+    <p class="fade-in">PLC 宸ョ▼甯?| 鑷姩鍖栧伐绋嬪笀 | 鐢垫皵璋冭瘯宸ョ▼甯?| 鎶€鏈攢鍞伐绋嬪笀</p>
     <div class="cta-buttons fade-in">
-      <a href="mailto:2192156464@qq.com" class="btn-primary">发送邮件</a>
-      <a href="tel:17368894575" class="btn-outline">拨打电话</a>
+      <a href="mailto:2192156464@qq.com" class="btn-primary">鍙戦€侀偖浠?/a>
+      <a href="tel:17368894575" class="btn-outline">鎷ㄦ墦鐢佃瘽</a>
     </div>
   </div>
 </section>
@@ -755,11 +813,18 @@
 <!-- ==================== FOOTER ==================== -->
 <footer class="footer">
   <div class="footer-inner">
-    <p class="footer-name">李国庆</p>
-    <p>合肥大学 · 自动化专业 · 2026届应届毕业生</p>
-    <p style="margin-top: 8px;">&copy; 2026 个人主页</p>
+    <p class="footer-name">鏉庡浗搴?/p>
+    <p>鍚堣偉澶у 路 鑷姩鍖栦笓涓?路 2026灞婂簲灞婃瘯涓氱敓</p>
+    <p style="margin-top: 8px;">&copy; 2026 涓汉涓婚〉</p>
   </div>
 </footer>
+
+<!-- ==================== LIGHTBOX ==================== -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <img src="" alt="" id="lightbox-img">
+  <p class="lightbox-caption" id="lightbox-caption"></p>
+</div>
 
 <script>
   // Scroll animations
@@ -777,6 +842,25 @@
   window.addEventListener('scroll', () => {
     const navbar = document.getElementById('navbar');
     navbar.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Lightbox
+  function openLightbox(src, caption) {
+    const lb = document.getElementById('lightbox');
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox-caption').textContent = caption;
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    const lb = document.getElementById('lightbox');
+    lb.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
   });
 </script>
 
